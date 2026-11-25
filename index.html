@@ -99,6 +99,47 @@ h1{font-size:clamp(20px,5.5vw,32px);margin:12px 0 4px;text-shadow:4px 4px 0 #3a2
 .promo-choices button:hover{border-color:#ffcc44;background:#3a2a6a}
 .promo-overlay.hidden{display:none}
 
+
+.board-with-coords{display:grid;grid-template-columns:24px 1fr;grid-template-rows:1fr 22px;gap:2px}
+.board-with-coords .ranks{display:flex;flex-direction:column;justify-content:space-around;font-size:9px;color:#8a8acc;text-align:center;padding:4px 0}
+.board-with-coords .files{display:flex;justify-content:space-around;font-size:9px;color:#8a8acc;grid-column:2;padding:0 4px}
+.clocks{display:flex;justify-content:space-between;gap:8px;margin-bottom:12px}
+.clock{flex:1;background:#0f0f1a;border:3px solid #3a2a5a;padding:8px 6px;text-align:center;font-size:14px;color:#dde}
+.clock.active{border-color:#ffcc44;color:#ffcc44;box-shadow:0 0 8px rgba(255,200,60,.3)}
+.clock.low{color:#ff6688;border-color:#cc4466}
+.clock .clk-label{font-size:7px;color:#8877aa;margin-bottom:4px}
+.time-select{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:12px 0}
+.time-select button{font-family:inherit;font-size:9px;padding:10px 12px;background:#2a1a4a;color:#c8b8e8;border:3px solid #5a4a8a;cursor:pointer}
+.time-select button.on{border-color:#ffcc44;background:#4a3a2a;color:#ffe8c0}
+.replay-bar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.replay-bar button{font-family:inherit;font-size:10px;padding:10px 12px;min-width:40px}
+#replay-screen{display:none;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:center;width:100%}
+
+
+.game-msg-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:3000;
+  display:flex;align-items:center;justify-content:center;padding:16px;
+}
+.game-msg-bg.hidden{display:none}
+.game-msg-box{
+  background:#1a1430;border:5px solid #7a6aaa;color:#e0e0ff;
+  font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.6;
+  padding:22px 20px;max-width:min(92vw,380px);text-align:center;
+  box-shadow:8px 8px 0 #1a0a2a;
+}
+.game-msg-box.err{border-color:#cc6688}
+.game-msg-box.ok{border-color:#66cc88}
+.game-msg-box .msg-text{margin-bottom:16px}
+.game-msg-box .msg-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.game-msg-box button{
+  font-family:inherit;font-size:10px;padding:12px 16px;
+  background:#3a2a6a;color:#e0d0ff;border:3px solid #7a6aaa;cursor:pointer;
+  box-shadow:3px 3px 0 #1a0a2a;
+}
+.game-msg-box button.yes{background:#2a5a3a;border-color:#44cc88}
+.game-msg-box button.no{background:#5a2a2a;border-color:#cc6666}
+
+
 .board-wrap{position:relative}
 .end-overlay{
   position:absolute;inset:0;background:rgba(0,0,0,.55);
@@ -164,7 +205,7 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
 </head>
 <body>
   <h1>DOGIE CHESS</h1>
-  <p class="subtitle">MEME EDITION • RETRO • 8-BIT</p>
+  <p class="subtitle">DOGE EDITION • RETRO • 8-BIT</p>
 
   <!-- LOGIN -->
   <div id="login-screen">
@@ -231,6 +272,14 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
         <div id="bots-levels" class="hidden">
           <div class="section-title" id="levels-title">STUFE</div>
           <div class="bots" id="levels-list"></div>
+          <div class="section-title" style="margin-top:16px">ZEIT</div>
+          <div class="time-select" id="time-bots">
+            <button type="button" data-sec="0" class="on" onclick="pickTime(0,this)">OHNE</button>
+            <button type="button" data-sec="60" onclick="pickTime(60,this)">1 MIN</button>
+            <button type="button" data-sec="180" onclick="pickTime(180,this)">3 MIN</button>
+            <button type="button" data-sec="300" onclick="pickTime(300,this)">5 MIN</button>
+            <button type="button" data-sec="600" onclick="pickTime(600,this)">10 MIN</button>
+          </div>
           <div class="center-btn-wrap">
             <button class="menu-btn" id="btn-start" disabled onclick="startGame()">SPIEL STARTEN</button>
           </div>
@@ -241,7 +290,15 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
       <div id="folder-online" class="hidden" style="width:100%;max-width:480px;text-align:center">
         <div class="section-title">ONLINE</div>
         <div style="background:var(--panel);border:4px solid #44cc88;padding:24px 20px;box-shadow:6px 6px 0 #1a0a2a">
-          <div style="font-size:11px;color:#66ffaa;margin-bottom:14px">Eigener Raum-Code (4–8 Zeichen)</div>
+          <div class="section-title" style="font-size:11px;margin-bottom:8px">ZEIT (Host wählt)</div>
+          <div class="time-select" id="time-online">
+            <button type="button" data-sec="0" class="on" onclick="pickTime(0,this)">OHNE</button>
+            <button type="button" data-sec="60" onclick="pickTime(60,this)">1 MIN</button>
+            <button type="button" data-sec="180" onclick="pickTime(180,this)">3 MIN</button>
+            <button type="button" data-sec="300" onclick="pickTime(300,this)">5 MIN</button>
+            <button type="button" data-sec="600" onclick="pickTime(600,this)">10 MIN</button>
+          </div>
+          <div style="font-size:11px;color:#66ffaa;margin:14px 0 14px">Eigener Raum-Code (4–8 Zeichen)</div>
           <input id="custom-code" placeholder="z.B. DOGE42" maxlength="8" autocomplete="off"
             style="font-family:inherit;font-size:14px;padding:14px;width:100%;max-width:260px;margin:0 auto 14px;display:block;background:#0f0f1a;border:3px solid #5a4a8a;color:#fff;text-align:center;text-transform:uppercase;letter-spacing:3px">
           <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
@@ -287,10 +344,40 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
     </div>
   </div>
 
+  <!-- REPLAY -->
+  <div id="replay-screen">
+    <div class="board-wrap">
+      <div class="board-with-coords">
+        <div class="ranks"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div>
+        <div class="board-container"><div id="replay-board"></div></div>
+        <div class="files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>AUFZEICHNUNG</h2>
+      <div id="replay-info" class="status" style="min-height:40px">–</div>
+      <div id="replay-step" style="font-size:10px;text-align:center;color:#8a8acc;margin-bottom:12px">Zug 0</div>
+      <div class="replay-bar">
+        <button onclick="replayTo(0)">⏮</button>
+        <button onclick="replayStep(-1)">◀</button>
+        <button id="btn-replay-play" onclick="toggleReplayPlay()">▶</button>
+        <button onclick="replayStep(1)">▶</button>
+        <button onclick="replayTo(9999)">⏭</button>
+      </div>
+      <div class="btn-row" style="margin-top:16px">
+        <button id="btn-replay-close" onclick="closeReplay()">ZURÜCK</button>
+      </div>
+    </div>
+  </div>
+
   <!-- GAME -->
   <div id="game">
     <div class="board-wrap">
-      <div class="board-container"><div id="board"></div></div>
+      <div class="board-with-coords">
+        <div class="ranks"><span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span></div>
+        <div class="board-container"><div id="board"></div></div>
+        <div class="files"><span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span></div>
+      </div>
       <div id="end-overlay" class="end-overlay hidden"></div>
     </div>
     <div class="panel">
@@ -310,6 +397,10 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
           <img id="p2-pic" src="" style="display:none">
           <span id="p2-label">SPIELER 2 – SCHWARZ</span>
         </div>
+      </div>
+      <div class="clocks hidden" id="clocks">
+        <div class="clock" id="clock-w"><div class="clk-label">WEISS</div><span id="time-w">5:00</span></div>
+        <div class="clock" id="clock-b"><div class="clk-label">SCHWARZ</div><span id="time-b">5:00</span></div>
       </div>
       <div id="status" class="status turn-white">WEISS am Zug</div>
       <div id="thinking" class="thinking hidden">DOGE DENKT...</div>
@@ -338,6 +429,12 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
     </div>
   </div>
 </div>
+  <div id="game-msg" class="game-msg-bg hidden">
+    <div class="game-msg-box" id="game-msg-box">
+      <div class="msg-text" id="game-msg-text"></div>
+      <div class="msg-btns" id="game-msg-btns"></div>
+    </div>
+  </div>
   <footer>Made By Miilonn<br>
   Online funktioniert weltweit • Seite wird zufällig vergeben</footer>
 
@@ -374,6 +471,11 @@ const DEFAULT_PIC='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" 
 let board=[],turn='w',selected=null,legalMoves=[],lastMove=null,history=[];
 let castling={wK:1,wQ:1,bK:1,bQ:1},enPassant=null,capturedWhite=[],capturedBlack=[];
 let currentBot=null,isTwoPlayer=false,isOnline=false,aiThinking=false,pendingPromo=null;
+let timeControlSec=0; // 0 = unlimited
+let whiteTime=0, blackTime=0, clockInterval=null, gameOver=false;
+let moveLog=[]; // {from,to,promo,castle,san}
+let replayMoves=[], replayIndex=0, replayTimer=null, replayPlaying=false;
+
 let myColor='w',peer=null,conn=null,amHost=false;
 let oppName='Gegner',oppPic='';
 let currentUser=null;
@@ -486,7 +588,7 @@ function saveProfile(){
 }
 function uploadPic(e){
   const file=e.target.files[0]; if(!file)return;
-  if(file.size>1500000){alert('Datei zu groß (max ~1.5MB)');return}
+  if(file.size>1500000){showMsg('Datei zu groß (max ~1.5MB)','err');return}
   const isGif = file.type==='image/gif' || /\.gif$/i.test(file.name);
   const reader=new FileReader();
   reader.onload=ev=>{
@@ -520,26 +622,29 @@ function updateBadges(p){
 function renderMatches(list){
   const el=document.getElementById('match-list');
   if(!list.length){el.innerHTML='<div style="text-align:center;color:#6655aa;padding:16px">Noch keine Spiele</div>';return}
-  el.innerHTML=list.slice(0,12).map(m=>`
-    <div class="match-item">
+  el.innerHTML=list.slice(0,12).map((m,i)=>`
+    <div class="match-item" style="cursor:pointer" onclick="openReplay(${i})" title="Aufzeichnung ansehen">
       ${m.pic?`<img src="${m.pic}">`:''}
       <span style="flex:1">${m.vs}</span>
       <span style="color:${m.result==='W'?'#66cc88':m.result==='L'?'#ee6666':'#ffcc44'}">${m.result==='W'?'SIEG':m.result==='L'?'NIEDERLAGE':'REMIS'}</span>
     </div>`).join('');
 }
-function addMatch(vs,result,pic){
+function addMatch(vs,result,pic,moves){
   const p=getProfile();
   if(result==='W')p.wins=(p.wins||0)+1; else if(result==='L')p.losses=(p.losses||0)+1; else p.draws=(p.draws||0)+1;
   p.matches=p.matches||[];
-  p.matches.unshift({vs,result,pic:pic||'',date:new Date().toLocaleDateString('de-DE')});
+  p.matches.unshift({vs,result,pic:pic||'',date:new Date().toLocaleDateString('de-DE'),moves:moves||moveLog.slice()});
   if(p.matches.length>30)p.matches.length=30;
   setProfile(p); loadProfile();
 }
 function resetStats(){
-  if(!confirm('Alle Stats und Matches löschen?'))return;
+  showConfirm('Alle Stats und Matches löschen?', ()=>doResetStats());
+}
+function doResetStats(){
   const p=getProfile();
   p.wins=0;p.losses=0;p.draws=0;p.matches=[];
   setProfile(p); loadProfile();
+  showMsg('Stats gelöscht', 'ok');
 }
 
 /* ===== TABS ===== */
@@ -556,6 +661,113 @@ function showTab(name){
 /* ===== LEARN MODE ===== */
 
 /* ===== MENU ===== */
+function showMsg(msg, kind){
+  const bg=document.getElementById('game-msg');
+  const box=document.getElementById('game-msg-box');
+  const text=document.getElementById('game-msg-text');
+  const btns=document.getElementById('game-msg-btns');
+  if(!bg) return;
+  text.textContent=msg;
+  box.className='game-msg-box'+(kind?(' '+kind):'');
+  btns.innerHTML='<button type="button" onclick="hideMsg()">OK</button>';
+  bg.classList.remove('hidden');
+}
+function hideMsg(){
+  const bg=document.getElementById('game-msg');
+  if(bg) bg.classList.add('hidden');
+}
+function showConfirm(msg, onYes){
+  const bg=document.getElementById('game-msg');
+  const box=document.getElementById('game-msg-box');
+  const text=document.getElementById('game-msg-text');
+  const btns=document.getElementById('game-msg-btns');
+  if(!bg) return;
+  text.textContent=msg;
+  box.className='game-msg-box';
+  btns.innerHTML='';
+  const y=document.createElement('button'); y.type='button'; y.className='yes'; y.textContent='JA';
+  const n=document.createElement('button'); n.type='button'; n.className='no'; n.textContent='NEIN';
+  y.onclick=()=>{ hideMsg(); onYes&&onYes(); };
+  n.onclick=()=>hideMsg();
+  btns.appendChild(y); btns.appendChild(n);
+  bg.classList.remove('hidden');
+}
+function pickTime(sec, btn){
+  timeControlSec=sec;
+  const parent=btn.parentElement;
+  parent.querySelectorAll('button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+function formatTime(s){
+  s=Math.max(0,Math.ceil(s));
+  const m=Math.floor(s/60), sec=s%60;
+  return m+':'+String(sec).padStart(2,'0');
+}
+function updateClockDisplay(){
+  const tw=document.getElementById('time-w'), tb=document.getElementById('time-b');
+  if(tw) tw.textContent=formatTime(whiteTime);
+  if(tb) tb.textContent=formatTime(blackTime);
+  const cw=document.getElementById('clock-w'), cb=document.getElementById('clock-b');
+  if(cw){ cw.classList.toggle('active', turn==='w' && !gameOver); cw.classList.toggle('low', whiteTime<=10 && timeControlSec>0); }
+  if(cb){ cb.classList.toggle('active', turn==='b' && !gameOver); cb.classList.toggle('low', blackTime<=10 && timeControlSec>0); }
+}
+function startClocks(){
+  stopClocks();
+  if(timeControlSec<=0){
+    const c=document.getElementById('clocks');
+    if(c) c.classList.add('hidden');
+    return;
+  }
+  const c=document.getElementById('clocks');
+  if(c) c.classList.remove('hidden');
+  whiteTime=timeControlSec;
+  blackTime=timeControlSec;
+  updateClockDisplay();
+  clockInterval=setInterval(()=>{
+    if(gameOver) return;
+    // Wer am Zug ist, verliert Zeit – bei 0 verloren
+    if(turn==='w'){
+      whiteTime-=0.1;
+      if(whiteTime<=0){ whiteTime=0; updateClockDisplay(); onFlag('w'); return; }
+    } else {
+      blackTime-=0.1;
+      if(blackTime<=0){ blackTime=0; updateClockDisplay(); onFlag('b'); return; }
+    }
+    updateClockDisplay();
+  },100);
+}
+function stopClocks(){ if(clockInterval){ clearInterval(clockInterval); clockInterval=null; } }
+function onFlag(side, fromRemote){
+  if(gameOver) return;
+  stopClocks();
+  gameOver=true;
+  if(isOnline && !fromRemote) send({type:'flag',side});
+  const el=document.getElementById('status');
+  const flaggedWhite = side==='w';
+  // Wer 0 hat, verliert
+  if(isOnline||isTwoPlayer){
+    const iWon = (myColor==='w' && !flaggedWhite) || (myColor==='b' && flaggedWhite);
+    el.textContent = flaggedWhite
+      ? 'WEISS Zeit 0 – Schwarz gewinnt'
+      : 'SCHWARZ Zeit 0 – Weiss gewinnt';
+    showEndOverlay(iWon?'GEWONNEN':'VERLOREN', iWon?'win':'lose');
+    if(iWon) sndWin(); else sndResign();
+    addMatch(isOnline?oppName:'2 Spieler', iWon?'W':'L', isOnline?oppPic:'', moveLog.slice());
+  } else {
+    // vs Bot: du bist Weiss
+    const youLose = flaggedWhite;
+    el.textContent = youLose
+      ? 'Deine Zeit ist abgelaufen – VERLOREN'
+      : 'Bot-Zeit abgelaufen – GEWONNEN';
+    showEndOverlay(youLose?'VERLOREN':'GEWONNEN', youLose?'lose':'win');
+    if(youLose) sndResign(); else sndWin();
+    addMatch(currentBot?currentBot.name:'Bot', youLose?'L':'W', '', moveLog.slice());
+  }
+  el.className='status mate';
+  selected=null; legalMoves=[]; render();
+}
+
 function openFolder(name){
   document.getElementById('folder-root').classList.toggle('hidden', name!=='root');
   document.getElementById('folder-bots').classList.toggle('hidden', name!=='bots');
@@ -661,10 +873,12 @@ function enterGame(){
 }
 
 function backToMenu(){
+  stopClocks(); gameOver=false;
   if(conn)try{conn.close()}catch(e){}
   if(peer)try{peer.destroy()}catch(e){}
   peer=null;conn=null;oppName='Gegner';oppPic='';
   document.getElementById('game').style.display='none';
+  document.getElementById('replay-screen').style.display='none';
   document.getElementById('menu').style.display='flex';
   openFolder('root');
   selectedChar=null; selectedLevel=null; currentBot=null;
@@ -720,11 +934,12 @@ function setupConnection(){
         const joinerColor = myColor==='w' ? 'b' : 'w';
         conn.send({type:'color',color:joinerColor});
         document.getElementById('online-status').textContent='Gegner da! Starte...';
-        setTimeout(()=>{enterGame(); send({type:'start'});},500);
+        setTimeout(()=>{enterGame(); send({type:'start',timeControlSec});},500);
       }
     } else if(data.type==='color'){
       myColor=data.color;
     } else if(data.type==='start'){
+      if(typeof data.timeControlSec==='number') timeControlSec=data.timeControlSec;
       enterGame();
     } else if(data.type==='move'){
       makeMove(data.move,true,true);
@@ -732,6 +947,8 @@ function setupConnection(){
       newGame(true);
     } else if(data.type==='resign'){
       handleResign(true);
+    } else if(data.type==='flag'){
+      onFlag(data.side, true);
     }
   });
   conn.on('close',()=>{ document.getElementById('status').textContent='Verbindung getrennt'; });
@@ -810,9 +1027,12 @@ function applyMove(move,isAI=false,isRemote=false){
   if(piece==='bR'&&fr===0&&fc===0)castling.bQ=false;if(piece==='bR'&&fr===0&&fc===7)castling.bK=false;
   enPassant=null;if(piece[1]==='P'&&Math.abs(tr-fr)===2)enPassant=[(fr+tr)/2,fc];
   lastMove=move;turn=turn==='w'?'b':'w';selected=null;legalMoves=[];
+  // record for replay
+  moveLog.push({from:move.from,to:move.to,promo:move.promo||null,castle:move.castle||null});
   if(wasCapture) sndCapture(); else sndMove();
   if(inCheck(turn)) sndCheck();
   render();updateStatus();updateCursor();updatePlayerHighlight();
+  updateClockDisplay();
   if(isOnline&&!isRemote)send({type:'move',move});
   if(!isTwoPlayer&&!isOnline&&!isAI&&turn==='b'&&currentBot)setTimeout(aiMove,350);
 }
@@ -919,8 +1139,9 @@ function updateStatus(){
   const el=document.getElementById('status');
   const moves=allLegalMoves(turn);
   const check=inCheck(turn);
+  if(gameOver) return;
   if(moves.length===0){
-    // Schachmatt = im Schach UND keine legalen Züge (König kann nie geschlagen werden)
+    gameOver=true; stopClocks();
     let result;
     if(check){
       // side to move is mated → the other side won
@@ -970,7 +1191,7 @@ function render(){
 }
 
 function onSquareClick(r,c){
-  if(aiThinking)return;
+  if(aiThinking||gameOver)return;
   if(isOnline&&turn!==myColor)return;
   if(!isTwoPlayer&&!isOnline&&turn!=='w')return;
   if(selected){const move=legalMoves.find(m=>m.to[0]===r&&m.to[1]===c);if(move){makeMove(move);return;}}
@@ -980,13 +1201,17 @@ function onSquareClick(r,c){
 
 function newGame(fromRemote=false){
   parseFEN(START_FEN);castling={wK:1,wQ:1,bK:1,bQ:1};enPassant=null;lastMove=null;selected=null;legalMoves=[];history=[];
-  capturedWhite=[];capturedBlack=[];aiThinking=false;document.getElementById('thinking').classList.add('hidden');
+  capturedWhite=[];capturedBlack=[];aiThinking=false;gameOver=false;moveLog=[];
+  document.getElementById('thinking').classList.add('hidden');
   hideEndOverlay(); pendingPromo=null;
   const po=document.getElementById("promo-overlay"); if(po) po.classList.add("hidden");
+  startClocks();
   render();updateStatus();updateCursor();updatePlayerHighlight();
-  if(isOnline&&!fromRemote&&amHost)send({type:'new'});
+  if(isOnline&&!fromRemote&&amHost)send({type:'new',timeControlSec});
 }
 function handleResign(fromRemote=false){
+  if(gameOver) return;
+  gameOver=true; stopClocks();
   if(!fromRemote && isOnline) send({type:'resign'});
   sndResign();
   const el=document.getElementById('status');
@@ -1006,8 +1231,90 @@ function handleResign(fromRemote=false){
   selected=null; legalMoves=[]; render();
 }
 function resign(){
-  if(!confirm('Wirklich aufgeben?')) return;
-  handleResign(false);
+  showConfirm('Wirklich aufgeben?', ()=>handleResign(false));
+}
+
+
+function openReplay(idx){
+  const p=getProfile();
+  const m=(p.matches||[])[idx];
+  if(!m||!m.moves||!m.moves.length){ showMsg('Keine Aufzeichnung für dieses Spiel', 'err'); return; }
+  replayMoves=m.moves;
+  replayIndex=0;
+  replayPlaying=false;
+  document.getElementById('menu').style.display='none';
+  document.getElementById('game').style.display='none';
+  document.getElementById('replay-screen').style.display='flex';
+  document.getElementById('replay-info').textContent=m.vs+' · '+(m.result==='W'?'Sieg':m.result==='L'?'Niederlage':'Remis')+' · '+m.date;
+  document.getElementById('btn-replay-play').textContent='▶';
+  replayTo(0);
+}
+function closeReplay(){
+  if(replayTimer){ clearInterval(replayTimer); replayTimer=null; }
+  replayPlaying=false;
+  document.getElementById('replay-screen').style.display='none';
+  document.getElementById('menu').style.display='flex';
+  showTab('profile');
+}
+function replayBoardState(upto){
+  // replay moves 0..upto-1 from start
+  parseFEN(START_FEN);
+  castling={wK:1,wQ:1,bK:1,bQ:1}; enPassant=null;
+  for(let i=0;i<upto && i<replayMoves.length;i++){
+    const mv=replayMoves[i];
+    const move={from:mv.from,to:mv.to,promo:mv.promo,castle:mv.castle};
+    // apply without side effects
+    const[fr,fc]=move.from,[tr,tc]=move.to;
+    const piece=board[fr][fc];
+    board[tr][tc]=piece; board[fr][fc]=null;
+    if(move.castle){ if(move.castle==='K'){board[tr][5]=board[tr][7];board[tr][7]=null;} else {board[tr][3]=board[tr][0];board[tr][0]=null;} }
+    if(piece && piece[1]==='P' && (tr===0||tr===7)) board[tr][tc]=(piece[0])+(move.promo||'Q');
+    if(piece && piece[1]==='P' && Math.abs(tr-fr)===2) enPassant=[(fr+tr)/2,fc]; else enPassant=null;
+    turn = turn==='w'?'b':'w';
+  }
+  lastMove = upto>0 ? {from:replayMoves[upto-1].from,to:replayMoves[upto-1].to} : null;
+}
+function renderReplay(){
+  const el=document.getElementById('replay-board');
+  if(!el) return;
+  el.innerHTML='';
+  el.style.display='grid';
+  el.style.gridTemplateColumns='repeat(8,1fr)';
+  el.style.gridTemplateRows='repeat(8,1fr)';
+  el.style.width='min(92vw,560px)';
+  el.style.height='min(92vw,560px)';
+  for(let r=0;r<8;r++)for(let c=0;c<8;c++){
+    const sq=document.createElement('div');
+    sq.className='square '+((r+c)%2===0?'light':'dark');
+    if(lastMove&&((lastMove.from[0]===r&&lastMove.from[1]===c)||(lastMove.to[0]===r&&lastMove.to[1]===c))) sq.classList.add('last-move');
+    const p=board[r][c];
+    if(p){ const span=document.createElement('span'); span.className='piece '+(p[0]==='w'?'white':'black'); span.textContent=PIECES[p]; sq.appendChild(span); }
+    el.appendChild(sq);
+  }
+  document.getElementById('replay-step').textContent='Zug '+replayIndex+' / '+replayMoves.length;
+}
+function replayTo(n){
+  replayIndex=Math.max(0, Math.min(replayMoves.length, n));
+  replayBoardState(replayIndex);
+  renderReplay();
+}
+function replayStep(d){
+  replayTo(replayIndex+d);
+}
+function toggleReplayPlay(){
+  if(replayPlaying){
+    replayPlaying=false;
+    if(replayTimer){ clearInterval(replayTimer); replayTimer=null; }
+    document.getElementById('btn-replay-play').textContent='▶';
+  } else {
+    replayPlaying=true;
+    document.getElementById('btn-replay-play').textContent='❚❚';
+    if(replayIndex>=replayMoves.length) replayTo(0);
+    replayTimer=setInterval(()=>{
+      if(replayIndex>=replayMoves.length){ toggleReplayPlay(); return; }
+      replayStep(1);
+    }, 700);
+  }
 }
 
 document.getElementById('btn-new').addEventListener('click',()=>newGame());
