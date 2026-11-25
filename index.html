@@ -140,6 +140,133 @@ h1{font-size:clamp(20px,5.5vw,32px);margin:12px 0 4px;text-shadow:4px 4px 0 #3a2
 .game-msg-box button.no{background:#5a2a2a;border-color:#cc6666}
 
 
+
+.book-btn{
+  position:fixed;top:14px;right:14px;z-index:1500;
+  width:48px;height:48px;border-radius:8px;
+  background:#2a1a4a;border:4px solid #9a7aff;
+  box-shadow:4px 4px 0 #1a0a2a;cursor:pointer;
+  font-size:24px;display:flex;align-items:center;justify-content:center;
+  font-family:inherit;color:#ffe8c0;
+}
+.book-btn:hover{background:#3a2a6a;transform:translate(-1px,-1px)}
+.book-btn .badge-n{
+  position:absolute;top:-6px;right:-6px;background:#ff4466;color:#fff;
+  font-size:8px;min-width:18px;height:18px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;border:2px solid #000;
+}
+.ach-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2500;
+  display:flex;align-items:center;justify-content:center;padding:12px;
+}
+.ach-bg.hidden{display:none}
+.ach-book{
+  background:#1a1430;border:6px solid #5a4a8a;max-width:560px;width:100%;
+  max-height:85vh;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:10px 10px 0 #1a0a2a;
+}
+.ach-book h2{
+  font-family:'Press Start 2P',monospace;font-size:14px;color:#ffe8c0;
+  text-align:center;padding:16px;border-bottom:4px solid #3a2a5a;
+  background:#2a1a4a;
+}
+.ach-list{overflow-y:auto;padding:12px;flex:1}
+.ach-item{
+  display:flex;gap:12px;align-items:flex-start;padding:12px;
+  border:3px solid #3a2a5a;margin-bottom:8px;background:#0f0f1a;
+}
+.ach-item.locked{opacity:.45;filter:grayscale(.8)}
+.ach-item.unlocked{border-color:#66aa66}
+.ach-icon{font-size:22px;width:36px;text-align:center;flex-shrink:0}
+.ach-body{flex:1;min-width:0}
+.ach-title{font-size:10px;color:#ffe8c0;margin-bottom:4px}
+.ach-desc{font-size:8px;color:#9988bb;line-height:1.5}
+.ach-close{
+  font-family:'Press Start 2P',monospace;font-size:10px;
+  margin:12px auto;display:block;padding:12px 20px;
+  background:#3a2a6a;color:#e0d0ff;border:3px solid #7a6aaa;cursor:pointer;
+}
+.ach-progress{font-size:8px;color:#8a8acc;text-align:center;padding:0 12px 8px}
+
+
+.profile-pic.frame-none{border-color:#7a6aaa}
+.profile-pic.frame-purple{border-color:#c44dff;box-shadow:0 0 0 3px #6a2a9a,0 0 12px #c44dff}
+.profile-pic.frame-gold{border-color:#ffcc44;box-shadow:0 0 0 3px #8a6a10,0 0 12px #ffcc44}
+.profile-pic.frame-green{border-color:#44cc66;box-shadow:0 0 0 3px #1a6a2a,0 0 12px #44cc66}
+.profile-pic.frame-red{border-color:#ff4466;box-shadow:0 0 0 3px #8a1a2a,0 0 12px #ff4466}
+.profile-pic.frame-cyan{border-color:#44e0ff;box-shadow:0 0 0 3px #1a6a8a,0 0 12px #44e0ff}
+.profile-pic.frame-pawn{border-color:#c8b8e8;box-shadow:0 0 0 3px #5a4a7a}
+.profile-pic.frame-pawn::after{content:'♙';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:16px;filter:drop-shadow(1px 1px 0 #000)}
+.profile-pic.frame-bishop{border-color:#88aaff;box-shadow:0 0 0 3px #2a3a6a}
+.profile-pic.frame-knight{border-color:#ffaa66;box-shadow:0 0 0 3px #6a3a1a}
+.profile-pic.frame-queen{border-color:#ff66cc;box-shadow:0 0 0 3px #6a1a4a,0 0 14px #ff66cc}
+.profile-pic-wrap{position:relative}
+.cos-btn{
+  position:absolute;bottom:-4px;left:-4px;background:#5a3a9a;border:2px solid #9a7aff;
+  font-size:14px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.cos-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2600;display:flex;align-items:center;justify-content:center;padding:12px}
+.cos-bg.hidden{display:none}
+.cos-panel{background:#1a1430;border:5px solid #5a4a8a;max-width:480px;width:100%;max-height:80vh;overflow:auto;padding:16px;box-shadow:8px 8px 0 #1a0a2a}
+.cos-panel h3{font-size:12px;color:#bbaaff;text-align:center;margin-bottom:12px}
+.cos-tabs{display:flex;gap:0;margin-bottom:14px;border:3px solid #5a4a8a}
+.cos-tabs button{flex:1;font-family:inherit;font-size:10px;padding:10px;background:#2a1a4a;color:#9988bb;border:none;cursor:pointer}
+.cos-tabs button.on{background:#5a3a9a;color:#fff}
+.cos-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cos-item{background:#0f0f1a;border:3px solid #3a2a5a;padding:10px;text-align:center;cursor:pointer;font-size:9px;color:#c8b8e8}
+.cos-item.on{border-color:#ffcc44}
+.cos-item.locked{opacity:.4;cursor:not-allowed}
+.cos-item .prev{width:48px;height:48px;margin:0 auto 6px;border:3px solid #7a6aaa;border-radius:4px;background:#2a1a4a}
+.equip-title{font-size:10px;color:#ffcc44;text-align:center;margin-top:6px}
+
+
+.profile-pic.frame-rook{border-color:#88ccee;box-shadow:0 0 0 3px #2a4a5a}
+.profile-pic.frame-rook::after{content:'♖';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:16px;filter:drop-shadow(1px 1px 0 #000)}
+.profile-pic.frame-queen-top{border-color:#ff66cc;box-shadow:0 0 0 3px #6a1a4a,0 0 12px #ff66cc}
+.profile-pic.frame-queen-top::after{content:'♕';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:16px;filter:drop-shadow(1px 1px 0 #000)}
+.profile-pic.frame-bishop-top{border-color:#88aaff;box-shadow:0 0 0 3px #2a3a6a}
+.profile-pic.frame-bishop-top::after{content:'♗';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:16px;filter:drop-shadow(1px 1px 0 #000)}
+.profile-pic.frame-knight-top{border-color:#ffaa66;box-shadow:0 0 0 3px #6a3a1a}
+.profile-pic.frame-knight-top::after{content:'♘';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:16px;filter:drop-shadow(1px 1px 0 #000)}
+.profile-pic.frame-multi{border-color:#ffe88a;box-shadow:0 0 0 3px #6a5a20}
+.profile-pic.frame-multi::after{content:'♙♘♗';position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:11px;white-space:nowrap;filter:drop-shadow(1px 1px 0 #000)}
+.ach-reward{font-size:7px;color:#88ccaa;margin-top:4px;line-height:1.4}
+.ach-item.unlocked .ach-reward{color:#aaffcc}
+.cos-item .prev{position:relative}
+
+
+.ach-item{position:relative}
+.ach-rewards-right{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  flex-shrink:0;min-width:44px;
+}
+.ach-rew-preview{
+  width:36px;height:36px;border:3px solid #7a6aaa;background:#2a1a4a;
+  position:relative;image-rendering:pixelated;
+}
+.ach-rew-preview.frame-none{border-color:#7a6aaa}
+.ach-rew-preview.frame-purple{border-color:#c44dff;box-shadow:0 0 6px #c44dff}
+.ach-rew-preview.frame-gold{border-color:#ffcc44;box-shadow:0 0 6px #ffcc44}
+.ach-rew-preview.frame-green{border-color:#44cc66;box-shadow:0 0 6px #44cc66}
+.ach-rew-preview.frame-red{border-color:#ff4466;box-shadow:0 0 6px #ff4466}
+.ach-rew-preview.frame-cyan{border-color:#44e0ff;box-shadow:0 0 6px #44e0ff}
+.ach-rew-preview.frame-pawn{border-color:#c8b8e8}
+.ach-rew-preview.frame-pawn::after{content:'♙';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:12px}
+.ach-rew-preview.frame-bishop-top{border-color:#88aaff}
+.ach-rew-preview.frame-bishop-top::after{content:'♗';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:12px}
+.ach-rew-preview.frame-knight-top{border-color:#ffaa66}
+.ach-rew-preview.frame-knight-top::after{content:'♘';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:12px}
+.ach-rew-preview.frame-rook{border-color:#88ccee}
+.ach-rew-preview.frame-rook::after{content:'♖';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:12px}
+.ach-rew-preview.frame-queen-top{border-color:#ff66cc}
+.ach-rew-preview.frame-queen-top::after{content:'♕';position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:12px}
+.ach-rew-preview.frame-queen{border-color:#ff66cc;box-shadow:0 0 6px #ff66cc}
+.ach-rew-preview.frame-multi{border-color:#ffe88a}
+.ach-rew-preview.frame-multi::after{content:'♙♘';position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:9px;white-space:nowrap}
+.ach-rew-title{
+  font-size:7px;color:#ffcc44;max-width:52px;text-align:center;line-height:1.3;
+}
+
 .board-wrap{position:relative}
 .end-overlay{
   position:absolute;inset:0;background:rgba(0,0,0,.55);
@@ -320,12 +447,14 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
           <div class="profile-pic-wrap">
             <img id="profile-pic" class="profile-pic" src="" alt="Profil">
             <label title="Bild ändern">📷<input type="file" accept="image/*" onchange="uploadPic(event)"></label>
+            <div class="cos-btn" title="Rahmen & Titel" onclick="openCosmetics()">🎨</div>
           </div>
           <div>
             <div class="profile-name"><input id="profile-name" maxlength="16" onchange="saveProfile()"></div>
             <div style="margin-top:8px;text-align:center">
               <span class="badge" id="badge-level">LEVEL 1</span>
               <span class="badge" id="badge-title">ANFÄNGER</span>
+              <div class="equip-title" id="equip-title"></div>
             </div>
           </div>
         </div>
@@ -429,6 +558,26 @@ footer{margin-top:28px;font-size:9px;color:#7766aa;text-align:center;max-width:5
     </div>
   </div>
 </div>
+  <button type="button" class="book-btn" id="book-btn" style="display:none" onclick="openAchievements()" title="Achievements">📖<span class="badge-n hidden" id="ach-badge">0</span></button>
+  <div id="ach-book" class="ach-bg hidden">
+    <div class="ach-book">
+      <h2>📖 ERFOLGE</h2>
+      <div class="ach-progress" id="ach-progress">0 / 100 freigeschaltet</div>
+      <div class="ach-list" id="ach-list"></div>
+      <button type="button" class="ach-close" onclick="closeAchievements()">SCHLIESSEN</button>
+    </div>
+  </div>
+  <div id="cos-panel" class="cos-bg hidden">
+    <div class="cos-panel">
+      <h3>BELOHNUNGEN</h3>
+      <div class="cos-tabs">
+        <button type="button" class="on" id="cos-tab-frames" onclick="showCosTab('frames')">RAHMEN</button>
+        <button type="button" id="cos-tab-titles" onclick="showCosTab('titles')">TITEL</button>
+      </div>
+      <div id="cos-content"></div>
+      <button type="button" class="ach-close" onclick="closeCosmetics()" style="margin-top:14px">SCHLIESSEN</button>
+    </div>
+  </div>
   <div id="game-msg" class="game-msg-bg hidden">
     <div class="game-msg-box" id="game-msg-box">
       <div class="msg-text" id="game-msg-text"></div>
@@ -542,11 +691,15 @@ function logout(){
 function showMain(){
   document.getElementById('login-screen').classList.add('hidden');
   document.getElementById('menu').classList.remove('hidden');
+  const bb=document.getElementById('book-btn'); if(bb) bb.style.display='flex';
   loadProfile();
+  updateAchBadge();
+  checkAchievements({});
 }
 function playAsGuest(){
   currentUser = null;
   localStorage.removeItem('dogieCurrentUser');
+  bumpMeta({guest:1});
   showMain();
   sndStart();
 }
@@ -579,12 +732,14 @@ function loadProfile(){
   document.getElementById('profile-pic').src=p.pic||DEFAULT_PIC;
   updateBadges(p);
   renderMatches(p.matches||[]);
+  applyCosmetics();
   return p;
 }
 function saveProfile(){
   const p=getProfile();
   p.name=document.getElementById('profile-name').value.trim()||currentUser||'Spieler';
   setProfile(p);
+  bumpMeta({named:1}); checkAchievements();
 }
 function uploadPic(e){
   const file=e.target.files[0]; if(!file)return;
@@ -596,7 +751,7 @@ function uploadPic(e){
     if(isGif){
       // GIFs behalten (Animation bleibt)
       const p=getProfile(); p.pic=data; setProfile(p);
-      document.getElementById('profile-pic').src=data;
+      document.getElementById('profile-pic').src=data; bumpMeta({pic:1}); checkAchievements();
       return;
     }
     const img=new Image();
@@ -606,7 +761,7 @@ function uploadPic(e){
       ctx.drawImage(img,0,0,128,128);
       const out=c.toDataURL('image/png');
       const p=getProfile(); p.pic=out; setProfile(p);
-      document.getElementById('profile-pic').src=out;
+      document.getElementById('profile-pic').src=out; bumpMeta({pic:1}); checkAchievements();
     };
     img.src=data;
   };
@@ -636,6 +791,28 @@ function addMatch(vs,result,pic,moves){
   p.matches.unshift({vs,result,pic:pic||'',date:new Date().toLocaleDateString('de-DE'),moves:moves||moveLog.slice()});
   if(p.matches.length>30)p.matches.length=30;
   setProfile(p); loadProfile();
+  const vsLower=(vs||'').toLowerCase();
+  if(vsLower.includes('doge')) bumpMeta({vs_doge:1});
+  if(vsLower.includes('peepo')) bumpMeta({vs_peepo:1});
+  if(result==='W' && vsLower.includes('doge')) {
+    bumpMeta({beat_doge:1});
+    if(vsLower.includes('stark')) bumpMeta({beat_doge_hard:1});
+  }
+  if(result==='W' && vsLower.includes('peepo')) {
+    bumpMeta({beat_peepo:1});
+    if(vsLower.includes('stark')) bumpMeta({beat_peepo_hard:1});
+  }
+  if(isOnline || vsLower.includes('online')) bumpMeta({online:1});
+  if(result==='W' && isOnline) { bumpMeta({online_win:1}); const st=getAchState(); st._online_wins=(st._online_wins||0)+1; setAchState(st); }
+  if(timeControlSec>0) bumpMeta({timed:1});
+  if(timeControlSec===60 && result==='W') bumpMeta({win_1min:1});
+  if(timeControlSec===600) bumpMeta({play_10min:1});
+  // streak
+  const st=getAchState();
+  if(result==='W'){ st._streak=(st._streak||0)+1; if(st._last==='L') st._comeback=1; }
+  else if(result==='L'){ st._streak=0; }
+  st._last=result; setAchState(st);
+  checkAchievements();
 }
 function resetStats(){
   showConfirm('Alle Stats und Matches löschen?', ()=>doResetStats());
@@ -692,6 +869,324 @@ function showConfirm(msg, onYes){
   btns.appendChild(y); btns.appendChild(n);
   bg.classList.remove('hidden');
 }
+
+const ACHIEVEMENTS=[
+  {id:'win_1',icon:'⭐',title:'Erster Sieg',desc:'Gewinne 1 Matches',test:'wins>=1'},
+  {id:'win_3',icon:'🌟',title:'Dreierpack',desc:'Gewinne 3 Matches',test:'wins>=3'},
+  {id:'win_5',icon:'✨',title:'Fünf Siege',desc:'Gewinne 5 Matches',test:'wins>=5'},
+  {id:'win_10',icon:'🏆',title:'Zehn Siege',desc:'Gewinne 10 Matches',test:'wins>=10'},
+  {id:'win_15',icon:'🥇',title:'15 Siege',desc:'Gewinne 15 Matches',test:'wins>=15'},
+  {id:'win_20',icon:'🥈',title:'20 Siege',desc:'Gewinne 20 Matches',test:'wins>=20'},
+  {id:'win_25',icon:'👑',title:'Champion',desc:'Gewinne 25 Matches',test:'wins>=25'},
+  {id:'win_30',icon:'💫',title:'30 Siege',desc:'Gewinne 30 Matches',test:'wins>=30'},
+  {id:'win_40',icon:'🔥',title:'40 Siege',desc:'Gewinne 40 Matches',test:'wins>=40'},
+  {id:'win_50',icon:'💎',title:'Legende',desc:'Gewinne 50 Matches',test:'wins>=50'},
+  {id:'win_75',icon:'🏅',title:'75 Siege',desc:'Gewinne 75 Matches',test:'wins>=75'},
+  {id:'win_100',icon:'🌈',title:'100 Siege',desc:'Gewinne 100 Matches',test:'wins>=100'},
+  {id:'lose_1',icon:'😅',title:'Lehrgeld',desc:'Verliere 1 Matches',test:'losses>=1'},
+  {id:'lose_3',icon:'🌧️',title:'Pechsträhne',desc:'Verliere 3 Matches',test:'losses>=3'},
+  {id:'lose_5',icon:'☁️',title:'Durchhalten',desc:'Verliere 5 Matches',test:'losses>=5'},
+  {id:'lose_10',icon:'💪',title:'Stehauf',desc:'Verliere 10 Matches',test:'losses>=10'},
+  {id:'lose_15',icon:'🧱',title:'15 Niederlagen',desc:'Verliere 15 Matches',test:'losses>=15'},
+  {id:'lose_25',icon:'🛡️',title:'Eiserne Nerven',desc:'Verliere 25 Matches',test:'losses>=25'},
+  {id:'lose_50',icon:'🗿',title:'Unbeugsam',desc:'Verliere 50 Matches',test:'losses>=50'},
+  {id:'draw_1',icon:'🤝',title:'Remis',desc:'1 Unentschieden',test:'draws>=1'},
+  {id:'draw_3',icon:'⚖️',title:'Fair Play',desc:'3 Unentschieden',test:'draws>=3'},
+  {id:'draw_5',icon:'🕊️',title:'Diplomat',desc:'5 Unentschieden',test:'draws>=5'},
+  {id:'draw_10',icon:'🌀',title:'10 Remis',desc:'10 Unentschieden',test:'draws>=10'},
+  {id:'matches_1',icon:'🎮',title:'Erster Zug',desc:'Spiele 1 Matches',test:'total>=1'},
+  {id:'matches_5',icon:'🎯',title:'Aufwärmen',desc:'Spiele 5 Matches',test:'total>=5'},
+  {id:'matches_10',icon:'📋',title:'Stammspieler',desc:'Spiele 10 Matches',test:'total>=10'},
+  {id:'matches_25',icon:'📚',title:'Vielspieler',desc:'Spiele 25 Matches',test:'total>=25'},
+  {id:'matches_50',icon:'🏟️',title:'Turnierhase',desc:'Spiele 50 Matches',test:'total>=50'},
+  {id:'matches_75',icon:'🎲',title:'75 Matches',desc:'Spiele 75 Matches',test:'total>=75'},
+  {id:'matches_100',icon:'💯',title:'Centurion',desc:'Spiele 100 Matches',test:'total>=100'},
+  {id:'matches_150',icon:'🌌',title:'150 Matches',desc:'Spiele 150 Matches',test:'total>=150'},
+  {id:'matches_200',icon:'🚀',title:'200 Matches',desc:'Spiele 200 Matches',test:'total>=200'},
+  {id:'level_3',icon:'📶',title:'Level 3',desc:'Erreiche Level 3',test:'level>=3'},
+  {id:'level_5',icon:'📈',title:'Level 5',desc:'Erreiche Level 5',test:'level>=5'},
+  {id:'level_8',icon:'📊',title:'Level 8',desc:'Erreiche Level 8',test:'level>=8'},
+  {id:'level_10',icon:'🚀',title:'Level 10',desc:'Erreiche Level 10',test:'level>=10'},
+  {id:'level_12',icon:'🛸',title:'Level 12',desc:'Erreiche Level 12',test:'level>=12'},
+  {id:'level_15',icon:'🌠',title:'Level 15',desc:'Erreiche Level 15',test:'level>=15'},
+  {id:'level_20',icon:'👑',title:'Level 20',desc:'Erreiche Level 20',test:'level>=20'},
+  {id:'vs_doge',icon:'🐕',title:'Wow',desc:'Spiele gegen Doge',test:'meta.vs_doge'},
+  {id:'vs_peepo',icon:'🐸',title:'Peepo Time',desc:'Spiele gegen Peepo',test:'meta.vs_peepo'},
+  {id:'beat_doge',icon:'🦴',title:'Doge besiegt',desc:'Gewinne gegen Doge',test:'meta.beat_doge'},
+  {id:'beat_peepo',icon:'👑',title:'Peepo besiegt',desc:'Gewinne gegen Peepo',test:'meta.beat_peepo'},
+  {id:'beat_both',icon:'⚔️',title:'Doppel-Boss',desc:'Besiege Doge und Peepo',test:'meta.beat_doge&&meta.beat_peepo'},
+  {id:'beat_doge_hard',icon:'💪',title:'Doge Hard',desc:'Besiege Doge auf STARK',test:'meta.beat_doge_hard'},
+  {id:'beat_peepo_hard',icon:'🧠',title:'Peepo Hard',desc:'Besiege Peepo auf STARK',test:'meta.beat_peepo_hard'},
+  {id:'online_play',icon:'🌐',title:'Online',desc:'Spiele online',test:'meta.online'},
+  {id:'online_win',icon:'📡',title:'Netz-Sieg',desc:'Gewinne online',test:'meta.online_win'},
+  {id:'online_3',icon:'🌍',title:'3 Online-Siege',desc:'3 Online-Siege',test:'meta.online_wins>=3'},
+  {id:'timed_game',icon:'⏱️',title:'Auf die Uhr',desc:'Mit Zeitlimit spielen',test:'meta.timed'},
+  {id:'flag_win',icon:'⌛',title:'Zeitnot-Sieg',desc:'Gegner-Zeit abgelaufen',test:'meta.flag_win'},
+  {id:'flag_lose',icon:'⏰',title:'Zu langsam',desc:'Eigene Zeit abgelaufen',test:'meta.flag_lose'},
+  {id:'pawn_sac_1',icon:'♙',title:'Bauern-Opfer',desc:'Opfere 1 Bauern',test:'meta.pawns_lost>=1'},
+  {id:'pawn_sac_10',icon:'♟️',title:'10 Bauern',desc:'Opfere 10 Bauern',test:'meta.pawns_lost>=10'},
+  {id:'pawn_sac_25',icon:'🪓',title:'25 Bauern',desc:'Opfere 25 Bauern',test:'meta.pawns_lost>=25'},
+  {id:'pawn_sac_50',icon:'💀',title:'50 Bauern geopfert',desc:'Opfere 50 Bauern',test:'meta.pawns_lost>=50'},
+  {id:'pawn_sac_100',icon:'⚰️',title:'Bauern-Massaker',desc:'Opfere 100 Bauern',test:'meta.pawns_lost>=100'},
+  {id:'queen_sac_1',icon:'♕',title:'Damen-Opfer',desc:'Opfere 1 Dame',test:'meta.queens_lost>=1'},
+  {id:'queen_sac_3',icon:'👑',title:'3 Damen geopfert',desc:'Opfere 3 Damen',test:'meta.queens_lost>=3'},
+  {id:'queen_sac_5',icon:'💥',title:'Damen-Opferer',desc:'Opfere 5 Damen',test:'meta.queens_lost>=5'},
+  {id:'rook_sac_1',icon:'♖',title:'Turm-Opfer',desc:'Opfere 1 Turm',test:'meta.rooks_lost>=1'},
+  {id:'rook_sac_5',icon:'🏰',title:'5 Türme',desc:'Opfere 5 Türme',test:'meta.rooks_lost>=5'},
+  {id:'rook_sac_10',icon:'🗼',title:'Turm-Schlacht',desc:'Opfere 10 Türme',test:'meta.rooks_lost>=10'},
+  {id:'bishop_sac_1',icon:'♗',title:'Läufer-Opfer',desc:'Opfere 1 Läufer',test:'meta.bishops_lost>=1'},
+  {id:'bishop_sac_5',icon:'✝️',title:'5 Läufer',desc:'Opfere 5 Läufer',test:'meta.bishops_lost>=5'},
+  {id:'bishop_sac_10',icon:'📐',title:'Läufer-Opferer',desc:'Opfere 10 Läufer',test:'meta.bishops_lost>=10'},
+  {id:'knight_sac_1',icon:'♘',title:'Springer-Opfer',desc:'Opfere 1 Springer',test:'meta.knights_lost>=1'},
+  {id:'knight_sac_5',icon:'🐴',title:'5 Springer',desc:'Opfere 5 Springer',test:'meta.knights_lost>=5'},
+  {id:'knight_sac_10',icon:'♞',title:'Springer-Rodeo',desc:'Opfere 10 Springer',test:'meta.knights_lost>=10'},
+  {id:'sac_any_20',icon:'🩸',title:'Opferbereit',desc:'20 eigene Figuren verloren',test:'(meta.pawns_lost+meta.knights_lost+meta.bishops_lost+meta.rooks_lost+meta.queens_lost)>=20'},
+  {id:'sac_any_50',icon:'☠️',title:'Blutbad',desc:'50 eigene Figuren verloren',test:'(meta.pawns_lost+meta.knights_lost+meta.bishops_lost+meta.rooks_lost+meta.queens_lost)>=50'},
+  {id:'captures_10',icon:'⚔️',title:'10 Schläge',desc:'Schlage 10 Figuren',test:'meta.captures>=10'},
+  {id:'captures_50',icon:'🗡️',title:'50 Schläge',desc:'Schlage 50 Figuren',test:'meta.captures>=50'},
+  {id:'captures_100',icon:'💥',title:'100 Schläge',desc:'Schlage 100 Figuren',test:'meta.captures>=100'},
+  {id:'promo_1',icon:'♕',title:'Umwandlung',desc:'Wandle einen Bauern um',test:'meta.promos>=1'},
+  {id:'promo_5',icon:'👑',title:'5 Umwandlungen',desc:'5 Bauern umwandeln',test:'meta.promos>=5'},
+  {id:'promo_knight',icon:'♘',title:'Unterverwandlung',desc:'Wandle in Springer um',test:'meta.promo_n'},
+  {id:'checks_10',icon:'❗',title:'10 Schachs',desc:'Gib 10 Schachs',test:'meta.checks>=10'},
+  {id:'checks_50',icon:'‼️',title:'50 Schachs',desc:'Gib 50 Schachs',test:'meta.checks>=50'},
+  {id:'resign_1',icon:'🏳️',title:'Aufgegeben',desc:'Gib einmal auf',test:'meta.resigns>=1'},
+  {id:'comeback',icon:'🔁',title:'Comeback',desc:'Gewinne nach 5 Niederlagen in Folge… nah dran: 1 Sieg nach Verlust',test:'meta.comeback'},
+  {id:'streak_3',icon:'🔥',title:'3er Serie',desc:'3 Siege in Folge',test:'meta.streak>=3'},
+  {id:'streak_5',icon:'🔥',title:'5er Serie',desc:'5 Siege in Folge',test:'meta.streak>=5'},
+  {id:'streak_10',icon:'🔥',title:'10er Serie',desc:'10 Siege in Folge',test:'meta.streak>=10'},
+  {id:'night_owl',icon:'🌙',title:'Nachtspiel',desc:'Spiele ein Match',test:'total>=1'},
+  {id:'book_open',icon:'📖',title:'Bücherwurm',desc:'Öffne das Erfolgsbuch',test:'meta.opened_book'},
+  {id:'cosmetic',icon:'🎨',title:'Stylist',desc:'Öffne Rahmen & Titel',test:'meta.opened_cos'},
+  {id:'guest',icon:'👻',title:'Gast',desc:'Spiele ohne Login',test:'meta.guest'},
+  {id:'named',icon:'📝',title:'Namensschild',desc:'Ändere deinen Namen',test:'meta.named'},
+  {id:'pic',icon:'🖼️',title:'Selfie',desc:'Lade ein Profilbild hoch',test:'meta.pic'},
+  {id:'replay',icon:'🎬',title:'Regisseur',desc:'Sieh eine Aufzeichnung an',test:'meta.replay'},
+  {id:'both_styles',icon:'🎭',title:'Zwei Stile',desc:'Spiele gegen Doge und Peepo',test:'meta.vs_doge&&meta.vs_peepo'},
+  {id:'win_time',icon:'⚡',title:'Blitz',desc:'Gewinne mit 1-Min-Partie',test:'meta.win_1min'},
+  {id:'long_game',icon:'🐢',title:'Endspiel',desc:'Spiele mit 10 Min',test:'meta.play_10min'},
+  {id:'mate_win',icon:'♚',title:'Schachmatt',desc:'Gewinne durch Matt',test:'meta.mate_win'},
+  {id:'first_frame',icon:'🖼️',title:'Erster Rahmen',desc:'Rüste einen Rahmen aus',test:'meta.used_frame'},
+  {id:'first_title',icon:'🏷️',title:'Erster Titel',desc:'Rüste einen Titel aus',test:'meta.used_title'},
+  {id:'wins_row_6',icon:'✳️',title:'Sieger-Pfad 6',desc:'Gewinne 12 Matches',test:'wins>=12'},
+  {id:'wins_row_7',icon:'✳️',title:'Sieger-Pfad 7',desc:'Gewinne 14 Matches',test:'wins>=14'},
+  {id:'wins_row_8',icon:'✳️',title:'Sieger-Pfad 8',desc:'Gewinne 16 Matches',test:'wins>=16'},
+  {id:'wins_row_9',icon:'✳️',title:'Sieger-Pfad 9',desc:'Gewinne 18 Matches',test:'wins>=18'},
+  {id:'wins_row_10',icon:'✳️',title:'Sieger-Pfad 10',desc:'Gewinne 20 Matches',test:'wins>=20'},
+  {id:'wins_row_11',icon:'✳️',title:'Sieger-Pfad 11',desc:'Gewinne 22 Matches',test:'wins>=22'},
+  {id:'extra_1',icon:'🔹',title:'Bonus 1',desc:'Spiele 3 Matches',test:'total>=3'},
+  {id:'extra_2',icon:'🔹',title:'Bonus 2',desc:'Spiele 6 Matches',test:'total>=6'},
+  {id:'extra_3',icon:'🔹',title:'Bonus 3',desc:'Spiele 9 Matches',test:'total>=9'},
+  {id:'extra_4',icon:'🔹',title:'Bonus 4',desc:'Spiele 12 Matches',test:'total>=12'},
+  {id:'extra_5',icon:'🔹',title:'Bonus 5',desc:'Spiele 15 Matches',test:'total>=15'},
+  {id:'extra_6',icon:'🔹',title:'Bonus 6',desc:'Spiele 18 Matches',test:'total>=18'},
+  {id:'extra_7',icon:'🔹',title:'Bonus 7',desc:'Spiele 21 Matches',test:'total>=21'},
+  {id:'extra_8',icon:'🔹',title:'Bonus 8',desc:'Spiele 24 Matches',test:'total>=24'},
+  {id:'extra_9',icon:'🔹',title:'Bonus 9',desc:'Spiele 27 Matches',test:'total>=27'},
+  {id:'extra_10',icon:'🔹',title:'Bonus 10',desc:'Spiele 30 Matches',test:'total>=30'},
+  {id:'extra_11',icon:'🔹',title:'Bonus 11',desc:'Spiele 33 Matches',test:'total>=33'}
+];
+
+const FRAMES=[
+  {id:'none',name:'Standard',cls:'frame-none',unlock:null},
+  {id:'purple',name:'Lila Aura',cls:'frame-purple',unlock:'win_5'},
+  {id:'gold',name:'Gold',cls:'frame-gold',unlock:'win_25'},
+  {id:'green',name:'Peepo Grün',cls:'frame-green',unlock:'beat_peepo'},
+  {id:'red',name:'Kampfrot',cls:'frame-red',unlock:'lose_10'},
+  {id:'cyan',name:'Cyan',cls:'frame-cyan',unlock:'online_win'},
+  {id:'pawn',name:'Bauern-Krone',cls:'frame-pawn',unlock:'pawn_sac_10'},
+  {id:'pawn50',name:'Bauern-Meister',cls:'frame-pawn',unlock:'pawn_sac_50'},
+  {id:'bishop',name:'Läufer',cls:'frame-bishop-top',unlock:'bishop_sac_1'},
+  {id:'bishop5',name:'Läufer-Orden',cls:'frame-bishop-top',unlock:'bishop_sac_5'},
+  {id:'knight',name:'Springer',cls:'frame-knight-top',unlock:'knight_sac_1'},
+  {id:'knight5',name:'Springer-Orden',cls:'frame-knight-top',unlock:'knight_sac_5'},
+  {id:'rook',name:'Turm',cls:'frame-rook',unlock:'rook_sac_1'},
+  {id:'rook5',name:'Turm-Wall',cls:'frame-rook',unlock:'rook_sac_5'},
+  {id:'queen_top',name:'Damen-Opfer',cls:'frame-queen-top',unlock:'queen_sac_1'},
+  {id:'queen',name:'Damen-Glanz',cls:'frame-queen',unlock:'promo_5'},
+  {id:'multi',name:'Opfer-Trio',cls:'frame-multi',unlock:'sac_any_20'},
+  {id:'queen_blood',name:'Blut-Dame',cls:'frame-red',unlock:'queen_sac_3'}
+];
+const TITLES=[
+  {id:'none',name:'—',unlock:null},
+  {id:'noob',name:'Noob',unlock:'first_match'},
+  {id:'pawn_pusher',name:'Pawn Pusher',unlock:'pawn_sac_10'},
+  {id:'tactical',name:'Tactical Frog',unlock:'beat_peepo'},
+  {id:'wow',name:'Such Wow',unlock:'beat_doge'},
+  {id:'chessmaster',name:'Chessmaster',unlock:'win_50'},
+  {id:'blitz',name:'Blitz Brain',unlock:'win_1min'},
+  {id:'survivor',name:'Survivor',unlock:'lose_25'},
+  {id:'online_king',name:'Online King',unlock:'online_3'},
+  {id:'legend',name:'Dogie Legend',unlock:'matches_100'},
+  {id:'queen_giver',name:'Queen Sacrifice',unlock:'queen_sac_3'},
+  {id:'sac_king',name:'Sacrificer',unlock:'sac_any_50'}
+];
+
+function getAchState(){
+  const key=currentUser?('dogieAch_'+currentUser):'dogieAch_guest';
+  return JSON.parse(localStorage.getItem(key)||'{}');
+}
+function setAchState(st){
+  const key=currentUser?('dogieAch_'+currentUser):'dogieAch_guest';
+  localStorage.setItem(key, JSON.stringify(st));
+}
+function getCosmetics(){
+  const key=currentUser?('dogieCos_'+currentUser):'dogieCos_guest';
+  return JSON.parse(localStorage.getItem(key)||'{"frame":"none","title":"none"}');
+}
+function setCosmetics(c){
+  const key=currentUser?('dogieCos_'+currentUser):'dogieCos_guest';
+  localStorage.setItem(key, JSON.stringify(c));
+}
+function evalAchTest(test, p, meta){
+  const wins=p.wins||0, losses=p.losses||0, draws=p.draws||0;
+  const total=wins+losses+draws;
+  const level=1+Math.floor(total/5);
+  try {
+    return !!(new Function('wins','losses','draws','total','level','meta', 'return ('+test+');')(wins,losses,draws,total,level,meta));
+  } catch(e){ return false; }
+}
+function unlockAch(id){
+  const st=getAchState();
+  if(st[id]) return false;
+  st[id]=Date.now();
+  setAchState(st);
+  showMsg('Erfolg: '+(ACHIEVEMENTS.find(a=>a.id===id)||{}).title, 'ok');
+  updateAchBadge();
+  return true;
+}
+function getMeta(){
+  const st=getAchState();
+  return {
+    vs_doge:!!st._vs_doge, vs_peepo:!!st._vs_peepo,
+    beat_doge:!!st._beat_doge, beat_peepo:!!st._beat_peepo,
+    beat_doge_hard:!!st._beat_doge_hard, beat_peepo_hard:!!st._beat_peepo_hard,
+    online:!!st._online, online_win:!!st._online_win, online_wins:st._online_wins||0,
+    timed:!!st._timed, flag_win:!!st._flag_win, flag_lose:!!st._flag_lose,
+    pawns_lost:st._pawns_lost||0, knights_lost:st._knights_lost||0, bishops_lost:st._bishops_lost||0, rooks_lost:st._rooks_lost||0, queens_lost:st._queens_lost||0, captures:st._captures||0, promos:st._promos||0,
+    promo_n:!!st._promo_n, checks:st._checks||0, resigns:st._resigns||0,
+    comeback:!!st._comeback, streak:st._streak||0, opened_book:!!st._opened_book,
+    opened_cos:!!st._opened_cos, guest:!!st._guest, named:!!st._named, pic:!!st._pic,
+    replay:!!st._replay, used_frame:!!st._used_frame, used_title:!!st._used_title,
+    win_1min:!!st._win_1min, play_10min:!!st._play_10min, mate_win:!!st._mate_win
+  };
+}
+function bumpMeta(patch){
+  const st=getAchState();
+  for(const k of Object.keys(patch)){
+    if(typeof patch[k]==='number' && typeof st['_'+k]==='number') st['_'+k]=(st['_'+k]||0)+patch[k];
+    else if(typeof patch[k]==='number') st['_'+k]=(st['_'+k]||0)+patch[k];
+    else st['_'+k]=patch[k];
+  }
+  setAchState(st);
+}
+function checkAchievements(){
+  const p=getProfile();
+  const meta=getMeta();
+  let n=0;
+  for(const a of ACHIEVEMENTS){
+    if(evalAchTest(a.test,p,meta)){
+      if(unlockAch(a.id)) n++;
+    }
+  }
+  updateAchBadge();
+  return n;
+}
+function updateAchBadge(){
+  const st=getAchState();
+  const n=ACHIEVEMENTS.filter(a=>st[a.id]).length;
+  const badge=document.getElementById('ach-badge');
+  const prog=document.getElementById('ach-progress');
+  if(prog) prog.textContent=n+' / '+ACHIEVEMENTS.length+' freigeschaltet';
+  if(badge){ if(n>0){ badge.textContent=n; badge.classList.remove('hidden'); } else badge.classList.add('hidden'); }
+}
+function rewardsForAch(achId){
+  const frames=[], titles=[];
+  for(const f of FRAMES){ if(f.unlock===achId) frames.push(f); }
+  for(const t of TITLES){ if(t.unlock===achId) titles.push(t); }
+  return {frames, titles};
+}
+function openAchievements(){
+  bumpMeta({opened_book:1});
+  checkAchievements();
+  const list=document.getElementById('ach-list');
+  const st=getAchState();
+  list.innerHTML=ACHIEVEMENTS.map(a=>{
+    const on=!!st[a.id];
+    const rew=rewardsForAch(a.id);
+    const names=[];
+    rew.frames.forEach(f=>names.push('🖼️ '+f.name));
+    rew.titles.forEach(t=>names.push('🏷️ '+t.name));
+    const rewHtml=names.length?('<div class="ach-reward">'+names.join(' · ')+'</div>'):'';
+    let right='';
+    if(rew.frames.length || rew.titles.length){
+      const bits=[];
+      rew.frames.forEach(f=>{
+        bits.push('<div class="ach-rew-preview '+f.cls+'" title="'+f.name+'"></div>');
+      });
+      rew.titles.forEach(t=>{
+        bits.push('<div class="ach-rew-title" title="Titel">'+t.name+'</div>');
+      });
+      right='<div class="ach-rewards-right">'+bits.join('')+'</div>';
+    }
+    return `<div class="ach-item ${on?'unlocked':'locked'}"><div class="ach-icon">${on?a.icon:'🔒'}</div><div class="ach-body"><div class="ach-title">${a.title}</div><div class="ach-desc">${a.desc}</div>${rewHtml}</div>${right}</div>`;
+  }).join('');
+  updateAchBadge();
+  document.getElementById('ach-book').classList.remove('hidden');
+}
+function closeAchievements(){ document.getElementById('ach-book').classList.add('hidden'); }
+function isUnlocked(achId){ if(!achId) return true; return !!getAchState()[achId]; }
+function openCosmetics(){
+  bumpMeta({opened_cos:1}); checkAchievements();
+  document.getElementById('cos-panel').classList.remove('hidden');
+  showCosTab('frames');
+}
+function closeCosmetics(){ document.getElementById('cos-panel').classList.add('hidden'); }
+function showCosTab(tab){
+  document.getElementById('cos-tab-frames').classList.toggle('on', tab==='frames');
+  document.getElementById('cos-tab-titles').classList.toggle('on', tab==='titles');
+  const cos=getCosmetics();
+  const el=document.getElementById('cos-content');
+  if(tab==='frames'){
+    el.innerHTML='<div class="cos-grid">'+FRAMES.map(f=>{
+      const ok=isUnlocked(f.unlock);
+      const on=cos.frame===f.id;
+      return `<div class="cos-item ${ok?'':'locked'} ${on?'on':''}" onclick="${ok?`equipFrame('${f.id}')`:''}"><div class="prev profile-pic ${f.cls}"></div>${f.name}${ok?'':' 🔒'}</div>`;
+    }).join('')+'</div>';
+  } else {
+    el.innerHTML='<div class="cos-grid">'+TITLES.map(t=>{
+      const ok=isUnlocked(t.unlock);
+      const on=cos.title===t.id;
+      return `<div class="cos-item ${ok?'':'locked'} ${on?'on':''}" onclick="${ok?`equipTitle('${t.id}')`:''}"><div style="font-size:12px;margin-bottom:6px;color:#ffcc44">${t.name}</div>${ok?'':'🔒'}</div>`;
+    }).join('')+'</div>';
+  }
+}
+function equipFrame(id){
+  const c=getCosmetics(); c.frame=id; setCosmetics(c);
+  if(id!=='none') bumpMeta({used_frame:1});
+  applyCosmetics(); showCosTab('frames'); checkAchievements();
+}
+function equipTitle(id){
+  const c=getCosmetics(); c.title=id; setCosmetics(c);
+  if(id!=='none') bumpMeta({used_title:1});
+  applyCosmetics(); showCosTab('titles'); checkAchievements();
+}
+function applyCosmetics(){
+  const c=getCosmetics();
+  const pic=document.getElementById('profile-pic');
+  if(pic){
+    pic.className='profile-pic';
+    const fr=FRAMES.find(f=>f.id===c.frame)||FRAMES[0];
+    pic.classList.add(fr.cls);
+  }
+  const et=document.getElementById('equip-title');
+  if(et){
+    const t=TITLES.find(x=>x.id===c.title);
+    et.textContent=(t&&t.id!=='none')?t.name:'';
+  }
+}
+
+
 function pickTime(sec, btn){
   timeControlSec=sec;
   const parent=btn.parentElement;
@@ -753,15 +1248,16 @@ function onFlag(side, fromRemote){
       : 'SCHWARZ Zeit 0 – Weiss gewinnt';
     showEndOverlay(iWon?'GEWONNEN':'VERLOREN', iWon?'win':'lose');
     if(iWon) sndWin(); else sndResign();
+    if(iWon) bumpMeta({flag_win:1}); else bumpMeta({flag_lose:1});
     addMatch(isOnline?oppName:'2 Spieler', iWon?'W':'L', isOnline?oppPic:'', moveLog.slice());
   } else {
-    // vs Bot: du bist Weiss
     const youLose = flaggedWhite;
     el.textContent = youLose
       ? 'Deine Zeit ist abgelaufen – VERLOREN'
       : 'Bot-Zeit abgelaufen – GEWONNEN';
     showEndOverlay(youLose?'VERLOREN':'GEWONNEN', youLose?'lose':'win');
     if(youLose) sndResign(); else sndWin();
+    if(!youLose) bumpMeta({flag_win:1}); else bumpMeta({flag_lose:1});
     addMatch(currentBot?currentBot.name:'Bot', youLose?'L':'W', '', moveLog.slice());
   }
   el.className='status mate';
@@ -1029,6 +1525,30 @@ function applyMove(move,isAI=false,isRemote=false){
   lastMove=move;turn=turn==='w'?'b':'w';selected=null;legalMoves=[];
   // record for replay
   moveLog.push({from:move.from,to:move.to,promo:move.promo||null,castle:move.castle||null});
+  // achievement stats
+  if(wasCapture && target){
+    bumpMeta({captures:1});
+    // eigene Figur verloren = geopfert (Figur gehörte nicht dem Ziehenden)
+    const lostOwn = target[0] !== piece[0];
+    if(lostOwn){
+      // aus Sicht: target is the sacrificed piece
+      // Für Stats: wenn Spieler Weiß vs Bot, zählen weiße Verluste; online myColor
+      const mySide = (isOnline || isTwoPlayer) ? myColor : 'w';
+      if(target[0] === mySide){
+        if(target[1]==='P') bumpMeta({pawns_lost:1});
+        if(target[1]==='N') bumpMeta({knights_lost:1});
+        if(target[1]==='B') bumpMeta({bishops_lost:1});
+        if(target[1]==='R') bumpMeta({rooks_lost:1});
+        if(target[1]==='Q') bumpMeta({queens_lost:1});
+      }
+    }
+  }
+  if(piece[1]==='P'&&(tr===0||tr===7)){
+    bumpMeta({promos:1});
+    if((move.promo||'Q')==='N') bumpMeta({promo_n:1});
+  }
+  if(inCheck(turn)) bumpMeta({checks:1});
+
   if(wasCapture) sndCapture(); else sndMove();
   if(inCheck(turn)) sndCheck();
   render();updateStatus();updateCursor();updatePlayerHighlight();
@@ -1158,7 +1678,7 @@ function updateStatus(){
         showEndOverlay(winnerIsWhite ? 'GEWONNEN' : 'VERLOREN', winnerIsWhite ? 'win' : 'lose');
       }
       el.className='status mate';
-      if(result==='W') sndWin(); else sndResign();
+      if(result==='W'){ sndWin(); bumpMeta({mate_win:1}); } else sndResign();
       if(result) addMatch(currentBot?currentBot.name:(isOnline?oppName:'2 Spieler'),result,isOnline?oppPic:'');
     } else {
       el.textContent='PATTSITUATION – Remis';
@@ -1212,6 +1732,7 @@ function newGame(fromRemote=false){
 function handleResign(fromRemote=false){
   if(gameOver) return;
   gameOver=true; stopClocks();
+  if(!fromRemote) bumpMeta({resigns:1});
   if(!fromRemote && isOnline) send({type:'resign'});
   sndResign();
   const el=document.getElementById('status');
@@ -1244,7 +1765,7 @@ function openReplay(idx){
   replayPlaying=false;
   document.getElementById('menu').style.display='none';
   document.getElementById('game').style.display='none';
-  document.getElementById('replay-screen').style.display='flex';
+  document.getElementById('replay-screen').style.display='flex'; bumpMeta({replay:1}); checkAchievements();
   document.getElementById('replay-info').textContent=m.vs+' · '+(m.result==='W'?'Sieg':m.result==='L'?'Niederlage':'Remis')+' · '+m.date;
   document.getElementById('btn-replay-play').textContent='▶';
   replayTo(0);
