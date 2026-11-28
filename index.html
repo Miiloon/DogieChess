@@ -24,17 +24,18 @@
         s.style.fontSize=(18+Math.random()*28)+'px';
         s.style.opacity=String(0.07+Math.random()*0.1);
         const o={el:s,x:Math.random()*100,y:Math.random()*100,vx:(Math.random()-0.5)*0.03,vy:(Math.random()-0.5)*0.025,rot:Math.random()*360,vr:(Math.random()-0.5)*0.35};
-        s.style.left=o.x+'%'; s.style.top=o.y+'%';
+    s.style.left='0'; s.style.top='0';
         bg.appendChild(s); floats.push(o);
       }
     }
+        let _fc=0;
     function tick(){
+      if(document.body.classList.contains('in-game')||++_fc%6){requestAnimationFrame(tick);return;}
       for(const f of floats){
-        f.x+=f.vx; f.y+=f.vy; f.rot+=f.vr;
+        f.x+=f.vx*6; f.y+=f.vy*6; f.rot+=f.vr*6;
         if(f.x<-5)f.x=105; if(f.x>105)f.x=-5;
         if(f.y<-5)f.y=105; if(f.y>105)f.y=-5;
-        f.el.style.left=f.x+'%'; f.el.style.top=f.y+'%';
-        f.el.style.transform='rotate('+f.rot+'deg)';
+f.el.style.transform='translate3d('+f.x+'vw,'+f.y+'vh,0) rotate('+f.rot+'deg)';
       }
       requestAnimationFrame(tick);
     }
@@ -470,7 +471,7 @@ body.theme-matrix{--bg:#020a02;--panel:#0a1a0a;--border:#22ff66;--accent:#66ff99
 }
 body.in-game #piece-bg{ opacity:0.35; }
 body.in-menu #piece-bg{ opacity:1; }
-#login-screen, #menu, #game, footer, #notify-stack, #game-msg, #settings-panel, #cos-panel, #ach-book{
+#login-screen, #menu, #game, footer{
   position:relative; z-index:1;
 }
 .settings-btn, .friends-btn, .book-btn{
@@ -565,6 +566,7 @@ body.in-game .emote-dock, body.show-emotes .emote-dock{display:flex}
 
 .role-host{color:#ffcc44!important;font-weight:bold}
 .role-vip{color:#ff66cc!important;font-weight:bold}
+.name-gold{color:#ffcc44!important;font-weight:bold}
 .clan-lvl-badge{display:inline-block;background:#2a1a4a;border:2px solid #7a6aaa;padding:2px 6px;font-size:8px;margin-left:6px;color:#c8b8e8}
 .board-pattern-check .sq.light{background:#d4a574!important}
 .board-pattern-check .sq.dark{background:#5c3d2e!important}
@@ -3286,7 +3288,8 @@ async function renderClan(){
     // members
     const ml=document.getElementById('clan-member-list');
     const isOwner=data.role==='owner';
-    ml.innerHTML=(data.member_stats||data.members||[]).map(m=>{
+      window._clanHost=data.host||data.owner||''; window._clanVips=data.vips||[];
+    ml.innerHTML=(data.member_stats||data.members||[]).map(m=>{    window._clanHost=data.host||data.owner||''; window._clanVips=data.vips||[];
       const name=typeof m==='string'?m:(m.username||m);
       const wins=m.wins||0, losses=m.losses||0, level=m.level||1;
       const hostUser=data.host||data.owner||'';
@@ -3301,7 +3304,8 @@ async function renderClan(){
         if(vips.indexOf(name)>=0) acts+='<button class="menu-btn small" onclick="setClanVip(\''+name+'\',false)">-VIP</button>';
         if(name!==hostUser) acts+='<button class="menu-btn small" onclick="transferHost(\''+name+'\')">→HOST</button>';
       }
-      return '<div class="clan-member"><span>@'+name+roleTag+' <span class="clan-lvl-badge">Lvl '+level+'</span> · '+wins+'W/'+losses+'L</span><span>'+acts+'</span></div>';
+      const goldName=(name===hostUser||vips.indexOf(name)>=0);
+      return '<div class="clan-member"><span>'+(goldName?'<span class="name-gold">@'+name+'</span>':'@'+name)+roleTag+' <span class="clan-lvl-badge">Lvl '+level+'</span> · '+wins+'W/'+losses+'L</span><span>'+acts+'</span></div>';
     }).join('')||'Keine Mitglieder';
     const cl=clanLevelFromXp(data.xp||0);
     const titleEl=document.getElementById('clan-title-name');
@@ -3410,7 +3414,13 @@ async function loadClanChat(){
   try{
     const data=await supaRpc('clan_chat_fetch',{p_user:cloudSession.username,p_pass:cloudSession.pass});
     const msgs=data&&data.messages||[];
-    box.innerHTML=msgs.map(m=>`<div style="margin:4px 0"><b>@${escapeHtml(m.from)}:</b> ${escapeHtml(m.text)}</div>`).join('')||'<div style="color:#6655aa">Noch keine Nachrichten</div>';
+    box.innerHTML=msgs.map(m=>{
+      const gold=(m.from===window._clanHost||(window._clanVips||[]).indexOf(m.from)>=0);
+      return `<div style="margin:4px 0"><b${gold?' class="name-gold"':''}>@${escapeHtml(m.from)}:</b> ${escapeHtml(m.text)}</div>`;
+    }).join('')||'<div style="color:#6655aa">Noch keine Nachrichten</div>';    box.innerHTML=msgs.map(m=>{
+      const gold=(m.from===window._clanHost||(window._clanVips||[]).indexOf(m.from)>=0);
+      return `<div style="margin:4px 0"><b${gold?' class="name-gold"':''}>@${escapeHtml(m.from)}:</b> ${escapeHtml(m.text)}</div>`;
+    }).join('')||'<div style="color:#6655aa">Noch keine Nachrichten</div>';
     box.scrollTop=box.scrollHeight;
   }catch(e){ box.innerHTML='Chat Fehler'; }
 }
